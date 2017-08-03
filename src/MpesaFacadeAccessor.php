@@ -1,10 +1,10 @@
 <?php
 
-namespace Mobidev\Mpesa;
+namespace Ngodasamuel\Mpesa;
 
 
 use App\Http\Requests;
-use Mobidev\Mpesa\Services\OnlineCheckout;
+use Ngodasamuel\Mpesa\Services\OnlineCheckout;
 
 /**
  * PROCESS FLOW

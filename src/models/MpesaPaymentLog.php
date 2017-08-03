@@ -1,6 +1,6 @@
 <?php
 
-namespace Mobidev\Mpesa\models;
+namespace Ngodasamuel\Mpesa\models;
 
 use Illuminate\Database\Eloquent\Model;
 

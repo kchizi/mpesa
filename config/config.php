@@ -12,4 +12,8 @@ return [
     'c2b' => [
         'paybill' => env('MPESA_C2B_PAYBILL_NUMBER', '') // provided by Safaricom
     ]
+    'CONSUMER_KEY' =>'',
+    'CONSUMER_SECRET' =>'',
+    'CONFIRMATIONURL' => 'http://ip_address:port/confirmation',
+    'VALIDATIONURL' => 'http://ip_address:port/validation_url'
 ];

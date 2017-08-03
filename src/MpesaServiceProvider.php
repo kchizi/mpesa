@@ -1,9 +1,9 @@
 <?php
 
-namespace Mobidev\Mpesa;
+namespace Ngodasamuel\Mpesa;
 
 use Illuminate\Support\ServiceProvider;
-use Mobidev\Mpesa\Services\OnlineCheckout;
+use Ngodasamuel\Mpesa\Services\OnlineCheckout;
 
 class MpesaServiceProvider extends ServiceProvider
 {
@@ -25,7 +25,7 @@ class MpesaServiceProvider extends ServiceProvider
 
         // publish views
         $this->publishes([
-            __DIR__ . '/views' => base_path('resources/views/mobidev/mpesa'),
+            __DIR__ . '/views' => base_path('resources/views/ngodasamuel/mpesa'),
         ], 'views');
 
         // publish config files
@@ -54,7 +54,7 @@ class MpesaServiceProvider extends ServiceProvider
     private function registerPackage()
     {
         // C2B Controller
-        $this->app->make('Mobidev\Mpesa\controllers\C2BController');
+        $this->app->make('Ngodasamuel\Mpesa\controllers\C2BController');
 
         // Online Checkout Service
         $this->app->singleton('online_checkout', function () {

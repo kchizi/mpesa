@@ -1,9 +1,9 @@
 <?php
-namespace Mobidev\Mpesa\Services;
+namespace Ngodasamuel\Mpesa\Services;
 
 use App\Responses\FailureResponse;
 use Carbon\Carbon;
-use Mobidev\Mpesa\Traits\MpesaRequest;
+use Ngodasamuel\Mpesa\Traits\MpesaRequest;
 
 class OnlineCheckout
 {

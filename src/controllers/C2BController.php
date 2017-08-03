@@ -1,20 +1,20 @@
 <?php
 
-namespace Mobidev\Mpesa\controllers;
+namespace Ngodasamuel\Mpesa\controllers;
 
 //use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
-use Mobidev\Mpesa\models\MpesaBalance;
-use Mobidev\Mpesa\models\MpesaPaymentLog;
-use Mobidev\Mpesa\models\Payment;
-
+use Ngodasamuel\Mpesa\models\MpesaBalance;
+use Ngodasamuel\Mpesa\models\MpesaPaymentLog;
+use Ngodasamuel\Mpesa\models\Payment;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class C2BController extends BaseController
 {
-
     protected $dispatcher;
 
 
@@ -44,7 +44,6 @@ class C2BController extends BaseController
 
         // create payment
         self::createPayment($data);
-
     }
 
     /**
@@ -59,6 +58,58 @@ class C2BController extends BaseController
         MpesaPaymentLog::create($data);
     }
 
+    public function getauthtoken()
+    {
+        $client = new Client();
+        $credentials = base64_encode(config('CONSUMER_KEY').':'.config('CONSUMER_SECRET'));
+
+    // Create a POST request
+    $response = $client->request(
+     'GET',
+     'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
+     [
+         'Authorization' => ['Basic '.$credentials ]
+     ]
+    );
+
+    // Parse the response object, e.g. read the headers, body, etc.
+    $headers = $response->getHeaders();
+    $body = $response->getBody();
+
+    return body['Access_Token'];
+    }
+
+    public function registerc2b(Request $request)
+    {
+        $url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
+
+        $ACCESS_TOKEN =$this->getauthtoken();
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization:Bearer '.$ACCESS_TOKEN)); //setting custom header
+
+
+        $curl_post_data = array(
+        //Fill in the request parameters with valid values
+        'ShortCode' => ' ',
+        'ResponseType' => ' ',
+        'ConfirmationURL' => config('CONFIRMATIONURL'),
+        'ValidationURL' => config('VALIDATIONURL')
+        );
+
+        $data_string = json_encode($curl_post_data);
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+
+        $curl_response = curl_exec($curl);
+        print_r($curl_response);
+
+        echo $curl_response;
+        // Show the page
+    }
 
     /**
      * We dive deep into the soap and extract the data needed to for the payments table
@@ -141,7 +192,6 @@ class C2BController extends BaseController
 
             // Fire the 'payment received' event
             $this->dispatcher->fire('c2b.received.payment', $payload);
-
         }
     }
 

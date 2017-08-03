@@ -1,10 +1,10 @@
 <?php
 
-namespace Mobidev\Mpesa\Traits;
+namespace Ngodasamuel\Mpesa\Traits;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Mobidev\Mpesa\Services\OnlineCheckout;
+use Ngodasamuel\Mpesa\Services\OnlineCheckout;
 
 trait MpesaRequest
 {
