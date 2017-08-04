@@ -86,7 +86,7 @@ class C2BController extends BaseController
         $rest = json_decode($rest,true);
 
         //print_r($rest);
-        return $rest[""access_token""];
+        return $rest["access_token"];
     }
 
     public function registerc2b(Request $request)
