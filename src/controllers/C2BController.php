@@ -64,8 +64,8 @@ class C2BController extends BaseController
         $client = new Client();
         $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
         echo config('mpesa.CONSUMER_KEY');
-echo $credentials;
-exit();
+//echo $credentials;
+//exit();
     // Create a POST request
     $response = $client->request(
      'GET',
