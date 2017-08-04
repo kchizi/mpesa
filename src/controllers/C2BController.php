@@ -71,9 +71,9 @@ class C2BController extends BaseController
         $headr[] = 'Authorization: Basic '.$credentials;
 
         curl_setopt($crl, CURLOPT_URL, $url);
-        curl_setopt($crl, CURLOPT_HTTPHEADER, array("Content-Length:0",'Authorization: Basic '.$credentials));
-        /*curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($crl, CURLOPT_USERPWD, config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));*/
+        curl_setopt($crl, CURLOPT_HTTPHEADER, array("Content-Length:0"));
+        curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($crl, CURLOPT_USERPWD, config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($crl, CURLINFO_HEADER_OUT, true);
         curl_setopt($crl, CURLOPT_POST, true);
