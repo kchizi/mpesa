@@ -11,10 +11,11 @@ use Ngodasamuel\Mpesa\models\MpesaBalance;
 use Ngodasamuel\Mpesa\models\MpesaPaymentLog;
 use Ngodasamuel\Mpesa\models\Payment;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
+use Ngodasamuel\Mpesa\Traits\MpesaRequest;
 
 class C2BController extends BaseController
 {
+  use MpesaRequest;
     protected $dispatcher;
 
 
@@ -61,8 +62,8 @@ class C2BController extends BaseController
     public function getauthtoken()
     {
         $client = new Client();
-        $credentials = base64_encode(config('CONSUMER_KEY').':'.config('CONSUMER_SECRET'));
-        echo config('CONSUMER_KEY');
+        $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
+        echo config('mpesa.CONSUMER_KEY');
 echo $credentials;
 exit();
     // Create a POST request
@@ -96,8 +97,8 @@ exit();
         //Fill in the request parameters with valid values
         'ShortCode' => ' ',
         'ResponseType' => ' ',
-        'ConfirmationURL' => config('CONFIRMATIONURL'),
-        'ValidationURL' => config('VALIDATIONURL')
+        'ConfirmationURL' => config('mpesa.CONFIRMATIONURL'),
+        'ValidationURL' => config('mpesa.VALIDATIONURL')
         );
 
         $data_string = json_encode($curl_post_data);
