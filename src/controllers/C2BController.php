@@ -72,7 +72,8 @@ class C2BController extends BaseController
      'GET',
      'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
      [
-         'Authorization' => ['Basic '.$credentials ]
+         'Authorization' => "Basic $credentials",
+         'debug' => true
      ]
     );
   } catch (RequestException $e) {
