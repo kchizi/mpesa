@@ -65,8 +65,7 @@ class C2BController extends BaseController
     $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
 
     // Parse the response object, e.g. read the headers, body, etc.
-    $headers = $response->getHeaders();
-    $body = $response->getBody();
+
     $url='https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
     $crl = curl_init();
 
