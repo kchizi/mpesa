@@ -80,12 +80,12 @@ class C2BController extends BaseController
         $rest = curl_exec($crl);
 
         $info = curl_getinfo($crl);
-        print_r($info['request_header']);
+        //print_r($info['request_header']);
 
         curl_close($crl);
-
-        print_r($rest);
-        return $rest;
+        echo  $rest["access_token"];
+        //print_r($rest);
+        return $rest[""];
     }
 
     public function registerc2b(Request $request)
