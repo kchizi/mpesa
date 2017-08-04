@@ -76,7 +76,7 @@ class C2BController extends BaseController
         curl_setopt($crl, CURLOPT_USERPWD, config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
         curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($crl, CURLINFO_HEADER_OUT, true);
-        curl_setopt($crl_handle, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($crl, CURLOPT_CUSTOMREQUEST, 'GET');
         $rest = curl_exec($crl);
 
         $info = curl_getinfo($crl);
