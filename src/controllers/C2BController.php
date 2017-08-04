@@ -61,44 +61,29 @@ class C2BController extends BaseController
 
     public function getauthtoken()
     {
-        $client = new Client();
-        $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
-        //echo config('mpesa.CONSUMER_KEY');
-//echo $credentials;
-//exit();
-    // Create a POST request
-    //try{
-    $response = $client->request(
-     'GET',
-     'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
-     [
-         'Authorization' => "Basic $credentials",
-         'debug' => true
-     ]
-    );
-  /*} catch (RequestException $e) {
 
-  // Catch all 4XX errors
-  print_r($e->getResponse()->getBody(true));
-  // To catch exactly error 400 use
-  if ($e->getResponse()->getStatusCode() == '400') {
+    $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
 
-          echo "Got response 400";
-  }
-
-  // You can check for whatever error status code you need
-
-} catch (\Exception $e) {
-  print_r($e->getResponse()->getBody(true));
-  // There was another exception.
-
-}
-exit();*/
     // Parse the response object, e.g. read the headers, body, etc.
     $headers = $response->getHeaders();
     $body = $response->getBody();
+    $url='https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+    $crl = curl_init();
 
-    return body['Access_Token'];
+    $headr = array();
+    $headr[] = 'Content-length: 0';
+    $headr[] = 'Content-type: application/json';
+    $headr[] = 'Authorization: Basic '.$credentials;
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
+    curl_setopt($crl, CURLOPT_POST,true);
+    $rest = curl_exec($crl);
+
+    curl_close($crl);
+
+    print_r($rest);
+    return $rest;
     }
 
     public function registerc2b(Request $request)
