@@ -63,10 +63,11 @@ class C2BController extends BaseController
     {
         $client = new Client();
         $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
-        echo config('mpesa.CONSUMER_KEY');
+        //echo config('mpesa.CONSUMER_KEY');
 //echo $credentials;
 //exit();
     // Create a POST request
+    try{
     $response = $client->request(
      'GET',
      'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
@@ -74,6 +75,23 @@ class C2BController extends BaseController
          'Authorization' => ['Basic '.$credentials ]
      ]
     );
+  } catch (RequestException $e) {
+
+  // Catch all 4XX errors
+
+  // To catch exactly error 400 use
+  if ($e->getResponse()->getStatusCode() == '400') {
+    print_r($e->getResponse());
+          echo "Got response 400";
+  }
+
+  // You can check for whatever error status code you need
+
+} catch (\Exception $e) {
+
+  // There was another exception.
+
+}
 
     // Parse the response object, e.g. read the headers, body, etc.
     $headers = $response->getHeaders();
