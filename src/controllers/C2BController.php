@@ -67,7 +67,7 @@ class C2BController extends BaseController
 //echo $credentials;
 //exit();
     // Create a POST request
-    try{
+    //try{
     $response = $client->request(
      'GET',
      'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
@@ -76,7 +76,7 @@ class C2BController extends BaseController
          'debug' => true
      ]
     );
-  } catch (RequestException $e) {
+  /*} catch (RequestException $e) {
 
   // Catch all 4XX errors
   print_r($e->getResponse()->getBody(true));
@@ -93,7 +93,7 @@ class C2BController extends BaseController
   // There was another exception.
 
 }
-exit();
+exit();*/
     // Parse the response object, e.g. read the headers, body, etc.
     $headers = $response->getHeaders();
     $body = $response->getBody();
