@@ -83,6 +83,7 @@ class C2BController extends BaseController
         //print_r($info['request_header']);
 
         curl_close($crl);
+        $rest = json_decode($rest,true);
         echo  $rest["access_token"];
         //print_r($rest);
         return $rest[""];
