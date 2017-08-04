@@ -84,9 +84,9 @@ class C2BController extends BaseController
 
         curl_close($crl);
         $rest = json_decode($rest,true);
-        echo  $rest["access_token"];
+
         //print_r($rest);
-        return $rest[""];
+        return $rest[""access_token""];
     }
 
     public function registerc2b(Request $request)
@@ -102,8 +102,8 @@ class C2BController extends BaseController
 
         $curl_post_data = array(
         //Fill in the request parameters with valid values
-        'ShortCode' => ' ',
-        'ResponseType' => ' ',
+        'ShortCode' => '918616',
+        'ResponseType' => '',
         'ConfirmationURL' => config('mpesa.CONFIRMATIONURL'),
         'ValidationURL' => config('mpesa.VALIDATIONURL')
         );
