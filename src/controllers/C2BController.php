@@ -11,11 +11,11 @@ use Ngodasamuel\Mpesa\models\MpesaBalance;
 use Ngodasamuel\Mpesa\models\MpesaPaymentLog;
 use Ngodasamuel\Mpesa\models\Payment;
 use GuzzleHttp\Exception\GuzzleException;
-use Ngodasamuel\Mpesa\Traits\MpesaRequest;
+use GuzzleHttp\Client;
 
 class C2BController extends BaseController
 {
-  use MpesaRequest;
+
     protected $dispatcher;
 
 
