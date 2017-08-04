@@ -62,7 +62,8 @@ class C2BController extends BaseController
     {
         $client = new Client();
         $credentials = base64_encode(config('CONSUMER_KEY').':'.config('CONSUMER_SECRET'));
-
+echo $credentials;
+exit();
     // Create a POST request
     $response = $client->request(
      'GET',
