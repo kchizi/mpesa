@@ -78,21 +78,21 @@ class C2BController extends BaseController
   } catch (RequestException $e) {
 
   // Catch all 4XX errors
-
+  print_r($e->getResponse());
   // To catch exactly error 400 use
   if ($e->getResponse()->getStatusCode() == '400') {
-    print_r($e->getResponse());
+
           echo "Got response 400";
   }
 
   // You can check for whatever error status code you need
 
 } catch (\Exception $e) {
-
+  print_r($e->getResponse());
   // There was another exception.
 
 }
-
+exit();
     // Parse the response object, e.g. read the headers, body, etc.
     $headers = $response->getHeaders();
     $body = $response->getBody();
