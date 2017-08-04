@@ -70,8 +70,6 @@ class C2BController extends BaseController
     $crl = curl_init();
 
     $headr = array();
-    $headr[] = 'Content-length: 0';
-    $headr[] = 'Content-type: application/json';
     $headr[] = 'Authorization: Basic '.$credentials;
 
     curl_setopt($crl, CURLOPT_URL, $url);
