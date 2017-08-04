@@ -15,7 +15,6 @@ use GuzzleHttp\Client;
 
 class C2BController extends BaseController
 {
-
     protected $dispatcher;
 
 
@@ -61,26 +60,31 @@ class C2BController extends BaseController
 
     public function getauthtoken()
     {
-
-    $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
+        $credentials = base64_encode(config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
 
     // Parse the response object, e.g. read the headers, body, etc.
 
     $url='https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-    $crl = curl_init();
+        $crl = curl_init();
 
-    $headr = array();
-    $headr[] = 'Authorization: Basic '.$credentials;
+        $headr = array();
+        $headr[] = 'Authorization: Basic '.$credentials;
 
-    curl_setopt($crl, CURLOPT_URL, $url);
-    curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
-    curl_setopt($crl, CURLOPT_POST,true);
-    $rest = curl_exec($crl);
+        curl_setopt($crl, CURLOPT_URL, $url);
+        curl_setopt($crl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($crl, CURLOPT_USERPWD, config('mpesa.CONSUMER_KEY').':'.config('mpesa.CONSUMER_SECRET'));
+        curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($crl, CURLINFO_HEADER_OUT, true);
+        curl_setopt($crl, CURLOPT_POST, true);
+        $rest = curl_exec($crl);
 
-    curl_close($crl);
+        $info = curl_getinfo($crl);
+        print_r($info['request_header']);
 
-    print_r($rest);
-    return $rest;
+        curl_close($crl);
+
+        print_r($rest);
+        return $rest;
     }
 
     public function registerc2b(Request $request)
