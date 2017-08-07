@@ -14,6 +14,8 @@ return [
     ]
     'CONSUMER_KEY' =>'',
     'CONSUMER_SECRET' =>'',
+    'SHORTCODE' =>'',
+    'RESPONSETYPE' =>'',
     'CONFIRMATIONURL' => 'http://ip_address:port/confirmation',
     'VALIDATIONURL' => 'http://ip_address:port/validation_url'
 ];

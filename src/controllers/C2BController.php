@@ -102,8 +102,8 @@ class C2BController extends BaseController
 
         $curl_post_data = array(
         //Fill in the request parameters with valid values
-        'ShortCode' => '602991',
-        'ResponseType' => 'Completed',
+        'ShortCode' => config('mpesa.SHORTCODE'),
+        'ResponseType' => config('mpesa.RESPONSETYPE'),
         'ConfirmationURL' => config('mpesa.CONFIRMATIONURL'),
         'ValidationURL' => config('mpesa.VALIDATIONURL')
         );
